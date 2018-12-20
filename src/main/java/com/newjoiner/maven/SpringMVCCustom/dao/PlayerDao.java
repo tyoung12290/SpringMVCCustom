@@ -1,4 +1,4 @@
-package com.newjoiner.maven.SpringMVCCustom.model;
+package com.newjoiner.maven.SpringMVCCustom.dao;
 
 import java.util.List;
 
@@ -10,5 +10,6 @@ public interface PlayerDao {
      
     List<Player> findAllPlayers();
  
- 
+    void savePlayer(Player player);
+    
 }

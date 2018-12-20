@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
  
-import com.newjoiner.maven.SpringMVCCustom.model.PlayerDao;
+import com.newjoiner.maven.SpringMVCCustom.dao.PlayerDao;
 import com.newjoiner.maven.SpringMVCCustom.model.Player;
 
 @Service("playerService")
@@ -23,6 +23,13 @@ public class PlayerServiceImpl implements PlayerService {
      
     public List<Player> findAllPlayers() {
         return dao.findAllPlayers();
+    }
+    
+    public void savePlayer(String firstName, String lastName){
+    	System.out.println("attempting to save");
+    	Player newPlayer = new Player(firstName, lastName);
+    	dao.savePlayer(newPlayer);
+    	System.out.println(newPlayer);
     }
      
 }

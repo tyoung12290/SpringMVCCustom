@@ -9,6 +9,8 @@ public interface PlayerService {
 	Player findById(int id);
  
     List<Player> findAllPlayers(); 
+    
+    void savePlayer(String firstName, String LastName);
      
      
 }

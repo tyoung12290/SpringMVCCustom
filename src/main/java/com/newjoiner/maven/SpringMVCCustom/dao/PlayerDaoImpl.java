@@ -1,4 +1,4 @@
-package com.newjoiner.maven.SpringMVCCustom.model;
+package com.newjoiner.maven.SpringMVCCustom.dao;
 
 import java.util.List;
 
@@ -21,5 +21,10 @@ public class PlayerDaoImpl extends AbstractDao<Integer, Player> implements Playe
     public List<Player> findAllPlayers() {
         Criteria criteria = createEntityCriteria();
         return (List<Player>) criteria.list();
+    }
+    
+    public void savePlayer(Player player) {
+    	System.out.println("inside Dao");
+        persist(player);
     }
 }
