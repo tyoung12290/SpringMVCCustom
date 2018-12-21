@@ -25,11 +25,8 @@ public class PlayerServiceImpl implements PlayerService {
         return dao.findAllPlayers();
     }
     
-    public void savePlayer(String firstName, String lastName){
-    	System.out.println("attempting to save");
-    	Player newPlayer = new Player(firstName, lastName);
-    	dao.savePlayer(newPlayer);
-    	System.out.println(newPlayer);
+    public void savePlayer(Player player){
+    	dao.savePlayer(player);
     }
      
 }

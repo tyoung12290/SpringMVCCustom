@@ -1,6 +1,7 @@
 <%@taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -19,59 +20,54 @@
 </head>
 
 <body>
-	<form id="playerSubmissionForm">
-		<input type="text" value="First Name" id="firstName"/>
-		<input type="text" value="Last Name" id="lastName"/>
-		<input type="button" value="GO!" onclick="doAjaxPost();" />
-		<div id="subViewDiv"></div>
-	</form>
+
+	<div class="col-md-2 col-md-offset-5">
+		<form:form action="/SpringMVCCustom/player" method="GET">
+			<input type="submit" class="btn btn-primary btn-lg" value="view all players">
+		</form:form>
+	</div>
+	<div  class="col-md-2 col-md-offset-5" ng-app="myApp" ng-controller="savePlayerCtrl as ctrl">
+		<form id="playerSubmissionForm" name="playerSubmissionForm">
+			<label for="firstName">first name </label>
+			<input id ="firstName" type="text"  ng-model="player.firstName" name="firstName" required/>
+			<label for="firstName">last name</label>
+			<input id = "lastName"  name="lastName" type="text"  ng-model="player.lastName" required/>
+			<label for="firstName">posion</label>
+			<input id = "pos" name = "pos" type="text"  ng-model="player.pos" optional/>
+			<label for="firstName">team</label>
+			<input id = "team" name = "pos" type="text"  ng-model="player.team" optional/>
+			<button class="btn btn-primary btn-lg"  ng-click="playerSubmissionForm.$valid && savePlayer()">
+			Save Player
+			</button>
+		</form>
+		<div id="mydiv">
+    		<table class = "table">
+			  <tr ng-repeat="player in allPlayers.data">
+			    <td>{{player.firstName}}</td>
+			    <td>{{player.lastName}}</td>
+			    <td>{{player.pos}}</td>
+			    <td>{{player.team}}</td>
+			  </tr>
+			</table>
+		</div>
+		<!-- ng-repeat through returned data on scope -->
+	</div>
 	
 	<script type="text/javascript">
-    function doAjaxPost(){
-    	var firstName = $("#firstName").val();
-    	var lastName = $("#lastName").val();
-    	$.ajax({
-    		type: 'post',
-    		url: 'savePlayer',
-    		data: {"firstName" : firstName, "lastName": lastName},
-    		success: function(response){
-    			$('#subViewDiv').html( response );
-    		},
-    		error: function(jqxhr, status, exception) {
-    			alert('Exception:', jqxhr);
-    		}
-    	});
-    }
-    </script>
+	var app = angular.module('myApp', []);
 	
-	<ul class="nav nav-tabs">
-	  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-	  <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-	  <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-	</ul>
-
-<div class="tab-content">
-  <div id="home" class="tab-pane fade in active">
-    <jsp:include page="/WEB-INF/views/allplayers.jsp">
-
-        <jsp:param name="title" value="LandingPage" />
-
-    </jsp:include>
-  </div>
-  <div id="menu1" class="tab-pane fade">
-    <h3>Menu 1</h3>
-    <p>Some content in menu 1.</p>
-  </div>
-  <div id="menu2" class="tab-pane fade">
-    <h3>Menu 2</h3>
-    <p>Some content in menu 2.</p>
-  </div>
-</div>
-
-
-<h3>Test</h3>
-
-
+	app.controller('savePlayerCtrl', ['$scope', '$http', function($scope, $http){
+		$scope.player={};
+		$scope.allPlayers={};
+		$scope.savePlayer = function (){
+			$http.post("http://localhost:8080/SpringMVCCustom/savePlayer",JSON.stringify($scope.player)).then(function(successData){
+				$scope.allPlayers=successData;
+				}, function(error){
+					console.log(error)
+				});
+		};
+	}]);
+	</script>
 </body>
 
 </html>

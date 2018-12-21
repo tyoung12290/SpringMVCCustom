@@ -10,7 +10,7 @@ public interface PlayerService {
  
     List<Player> findAllPlayers(); 
     
-    void savePlayer(String firstName, String LastName);
+    void savePlayer(Player player);
      
      
 }

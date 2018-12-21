@@ -24,7 +24,6 @@ public class PlayerDaoImpl extends AbstractDao<Integer, Player> implements Playe
     }
     
     public void savePlayer(Player player) {
-    	System.out.println("inside Dao");
         persist(player);
     }
 }

@@ -24,6 +24,8 @@
             <tr>
             <td>${player.firstName}</td>
             <td>${player.lastName}</td>
+            <td>${player.pos}</td>
+            <td>${player.team}</td>
             </tr>
         </c:forEach>
     </table>
