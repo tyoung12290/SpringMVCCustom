@@ -20,7 +20,7 @@
 </head>
 
 <body>
-
+	<div class = "container">
 	<div class="col-md-2 col-md-offset-5">
 		<form:form action="/SpringMVCCustom/player" method="GET">
 			<input type="submit" class="btn btn-primary btn-lg" value="view all players">
@@ -52,7 +52,14 @@
 		</div>
 		<!-- ng-repeat through returned data on scope -->
 	</div>
+	</div>
 	
+	<jsp:include page="/WEB-INF/templates/fragments/lineup.jsp">
+
+        <jsp:param name="title" value="Lineup" />
+
+    </jsp:include>
+    
 	<script type="text/javascript">
 	var app = angular.module('myApp', []);
 	
