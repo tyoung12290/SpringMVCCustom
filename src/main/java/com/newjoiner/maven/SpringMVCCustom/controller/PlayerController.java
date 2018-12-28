@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.newjoiner.maven.SpringMVCCustom.model.Player;
 import com.newjoiner.maven.SpringMVCCustom.service.PlayerService;
 
 @Controller
-public class HomeController {
+public class PlayerController {
 	
 	@Autowired
 	//TODO add access modifier
@@ -29,11 +30,13 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/player", method = RequestMethod.GET)
+	@RequestMapping(value="/players", method = RequestMethod.GET)
+	@ResponseBody
 	public String listPlayers(Model model) {
 		List<Player> players = playerService.findAllPlayers();
 		model.addAttribute("players",players);
-		return "allplayers";
+		Gson playerJson = new Gson();
+		return playerJson.toJson(players);
 	}
 	
 	@RequestMapping(value="/savePlayer", method = RequestMethod.POST)
