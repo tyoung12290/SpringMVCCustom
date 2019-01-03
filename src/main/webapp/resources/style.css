@@ -1,0 +1,73 @@
+div{
+	border-style:solid;
+	border-width:0px;
+	}
+	
+
+	
+	.lineup__body {
+	display: table;
+    height: 450px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+	}
+	
+	.lineup__slot{
+	display:flex;
+	display:list-item;
+	border-width:.5px;
+	margin: 0;
+	padding: 0 5px;
+	}
+	
+	.lineup__slot:not(.lineup__slot--has-player)>:not(.lineup__empty-state) {
+	display:none;
+	}
+	.lineup__slot:not(.lineup__slot--has-player) .lineup__empty-state{
+	display: flex
+	}
+	
+	
+	.lineup__empty-state{
+	 font-size: 16px;
+	 display:none;
+	 cursor:pointer;
+	 height:100%;
+	 width:100%;
+	 align-items:center;
+	 position: relative
+	}
+	
+	.lineup__player-container{
+	 display:flex;
+	 font-size: 16px;
+	 cursor:pointer;
+	 align-items:center;
+	 position: relative
+	}
+	.lineup__player{
+	 display:flex;
+	 height:100%;
+	 position:relative;
+	}
+	
+	.lineup_player_info{
+	 display:flex;
+	 height:100%;
+	 position:relative;
+	}
+	
+	.player_filters{
+	display:flex;
+	justify-content:left
+	}
+	
+	.btn-group{
+	align-self: flex-start
+	}
+	
+	.search_players{
+	margin-left:auto;
+	}
+	

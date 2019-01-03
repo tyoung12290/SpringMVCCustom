@@ -25,7 +25,7 @@ public class PlayerController {
 	//TODO add access modifier
 	PlayerService playerService;
 	
-	@RequestMapping(value="/", method = RequestMethod.GET)
+	@RequestMapping(value="/home", method = RequestMethod.GET)
 	public String home(){
 		return "home";
 	}
