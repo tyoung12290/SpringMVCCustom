@@ -2,7 +2,7 @@ package com.newjoiner.maven.SpringMVCCustom.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import com.newjoiner.maven.SpringMVCCustom.dao.AbstractDao;
 import com.newjoiner.maven.SpringMVCCustom.model.Player;
@@ -18,8 +18,8 @@ public class PlayerDaoImpl extends AbstractDao<Integer, Player> implements Playe
     @Override
 	@SuppressWarnings("unchecked")
     public List<Player> findAllPlayers() {
-        Criteria criteria = createEntityCriteria();
-        return criteria.list();
+    	Query query = customQuery("FROM Player");
+        return query.list();
     }
     
     @Override

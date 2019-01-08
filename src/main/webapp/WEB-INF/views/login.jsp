@@ -50,7 +50,7 @@ button:hover {
 
 </style>
 <div class = "login_container">
-<form:form action="/SpringMVCCustom/lineup" method="POST" modelAttribute="user">
+<form:form action="/SpringMVCCustom/home" method="POST" modelAttribute="user">
 		<input id="username" type="text" placeholder="Enter Username" name="username" value="${user.username}" required></input>
 		<input id="password" type="password" placeholder="Enter Password" name="password" value="${user.password}" required></input>
 	<button type="submit">Login</button>

@@ -2,10 +2,12 @@ package com.newjoiner.maven.SpringMVCCustom.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.newjoiner.maven.SpringMVCCustom.model.User;
 import com.newjoiner.maven.SpringMVCCustom.service.LoginService;
 
 
@@ -23,9 +25,10 @@ public class loginController {
 		return "login";
 	}
 	
-	@RequestMapping(value="/user/{user}", method = RequestMethod.GET)
-	public String login(@PathVariable(value="user") String username)  {
-		System.out.println(username);
-		return "redirect:/lineup/";
+	@RequestMapping(value="/home", method = RequestMethod.POST)
+	public String saveLineup(@ModelAttribute("user") User user, Model viewModel) {
+		User userObj = loginService.findByUser(user.getUsername());
+		viewModel.addAttribute("userId", userObj.getId());
+		return "home";
 	}
 }

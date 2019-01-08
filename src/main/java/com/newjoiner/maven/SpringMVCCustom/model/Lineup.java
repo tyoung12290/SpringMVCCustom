@@ -1,55 +1,50 @@
 package com.newjoiner.maven.SpringMVCCustom.model;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
  
 @Entity
 @Table(name="lineup")
 public class Lineup {
 	
-	public Lineup() {}
- 
+	public Lineup() {};
+	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
+	
+	
+	@Column(name="user_id")
+	private int userId;
  
-    @Column(name = "pg1", nullable = false)
-    private String pg1;
-     
-
-    @Column(name = "pg2", nullable = false)
-    private String pg2;
+	@ManyToMany(cascade= CascadeType.MERGE)
+    @JoinTable(name="LINEUP_PLAYER",
+    			joinColumns= {@JoinColumn(name="LINEUP_ID")},
+    			inverseJoinColumns= {@JoinColumn(name="PLAYER_ID")})	
+    private List<Player> players = new ArrayList<Player>();
     
-    @Column(name = "sg1", nullable = false)
-    private String sg1;
     
-    @Column(name = "sg2", nullable = false)
-    private String sg2;
+   /* @Column(name="salary")
+    private int salary;
     
-    @Column(name = "sf1", nullable = false)
-    private String sf1;
-    
-    @Column(name = "sf2", nullable = false)
-    private String sf2;
-    
-    @Column(name = "pf1", nullable = false)
-    private String pf1;
-    
-    @Column(name = "pf2", nullable = false)
-    private String pf2;
-    
-    @Column(name = "c", nullable = false)
-    private String c;
-    
-    @Column(name="date", nullable = false)
-    private Date date;
+    @Column(name="score")
+    private int score;*/
+	
+    /*@Column(name="date")
+    private Date date;*/
     
     public int getId() {
         return id;
@@ -58,96 +53,63 @@ public class Lineup {
     public void setId(int id) {
         this.id = id;
     }
+    
 
-	public String getPg1() {
-		return pg1;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setPg1(String pg1) {
-		this.pg1 = pg1;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	public String getPg2() {
-		return pg2;
+	public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + userId;
+		return result;
 	}
 
-	public void setPg2(String pg2) {
-		this.pg2 = pg2;
-	}
-
-	public String getSg1() {
-		return sg1;
-	}
-
-	public void setSg1(String sg1) {
-		this.sg1 = sg1;
-	}
-
-	public String getSg2() {
-		return sg2;
-	}
-
-	public void setSg2(String sg2) {
-		this.sg2 = sg2;
-	}
-
-	public String getSf1() {
-		return sf1;
-	}
-
-	public void setSf1(String sf1) {
-		this.sf1 = sf1;
-	}
-
-	public String getSf2() {
-		return sf2;
-	}
-
-	public void setSf2(String sf2) {
-		this.sf2 = sf2;
-	}
-
-	public String getPf1() {
-		return pf1;
-	}
-
-	public void setPf1(String pf1) {
-		this.pf1 = pf1;
-	}
-
-	public String getPf2() {
-		return pf2;
-	}
-
-	public void setPf2(String pf2) {
-		this.pf2 = pf2;
-	}
-
-	public String getC() {
-		return c;
-	}
-
-	public void setC(String c) {
-		this.c = c;
-	}
-
-	public Date getDate() {
+	/*public Date getDate() {
 		return date;
 	}
 
 	public void setDate(Date date) {
 		this.date = date;
+	}*/
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Lineup other = (Lineup) obj;
+		if (id != other.id)
+			return false;
+		if (userId != other.userId)
+			return false;
+		return true;
 	}
 
-	
-	
 	@Override
 	public String toString() {
-		return "Lineup [id=" + id + ", pg1=" + pg1 + ", pg2=" + pg2 + ", sg1=" + sg1 + ", sg2=" + sg2 + ", sf1=" + sf1
-				+ ", sf2=" + sf2 + ", pf1=" + pf1 + ", pf2=" + pf2 + ", c=" + c + ", date=" + date + "]";
+		return "Lineup [id=" + id + ", userId=" + userId + ", players=" + getPlayers() + "]";
 	}
- 
     
+	
 
 	
 }

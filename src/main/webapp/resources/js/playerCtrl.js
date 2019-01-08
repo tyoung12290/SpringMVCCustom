@@ -41,22 +41,6 @@ angular.module('myApp').controller('playerCtrl', ['$http', function($http){
 			}
 			
 		}
-		/*vm.setClickedRow = function(activePlayer){
-			let index= vm.allPlayers.data.indexOf(activePlayer)
-			for (let player of vm.lineup.players){
-				let props = Object.keys(player).length
-				if(player.pos === activePlayer.pos && !(Object.keys(player).length > 2)){
-					vm.lineup.playerCount[player.pos] ++;
-					Object.assign(player, activePlayer);
-					vm.allPlayers.data.splice(index,1);
-					vm.lineup.playerCount.total ++;
-					break;
-				}
-			}
-			
-			//TODO call function to change CSS if position has been filled
-		}*/
-		
 		vm.inLineup = function(playerId){
 			let bool = false;
 			for (let player of vm.lineup.players){
@@ -69,7 +53,6 @@ angular.module('myApp').controller('playerCtrl', ['$http', function($http){
 		}
 		
 		vm.addPlayer = function (activePlayer){
-			console.log("testing")
 			let index= vm.allPlayers.data.indexOf(activePlayer)
 			for (let player of vm.lineup.players){
 				if(player.pos === activePlayer.pos && !(Object.keys(player).length > 2)){
@@ -79,17 +62,14 @@ angular.module('myApp').controller('playerCtrl', ['$http', function($http){
 					break;
 				}
 			}
-			console.log(vm.lineup.players)
 		}
-		//TODO need to reset lineup to original not remove
 		vm.removePlayer = function(activePlayer, fromPlayers){
-			console.log(fromPlayers)
 			if(fromPlayers==true){
 				for (let player of vm.lineup.players){
 					if(activePlayer.id==player.id){
 						index = vm.lineup.players.indexOf(player);
 						vm.lineup.players[index] = {
-								lineupId: vm.lineup.players[index].lineupId ,
+								lineupSlot: vm.lineup.players[index].lineupSlot ,
 								pos :vm.lineup.players[index].pos
 						}
 						vm.lineup.playerCount.total --;
@@ -99,11 +79,28 @@ angular.module('myApp').controller('playerCtrl', ['$http', function($http){
 			}else{
 				index = vm.lineup.players.indexOf(activePlayer);
 				vm.lineup.players[index] = {
-						lineupId: vm.lineup.players[index].lineupId ,
+						lineupSlot: vm.lineup.players[index].lineupSlot ,
 						pos :vm.lineup.players[index].pos
 				}
 				vm.lineup.playerCount.total --;
 			}
 			
+		}
+		
+		vm.saveLineup = function(userId){
+			let lineup = {};
+			lineup.players=[];
+			
+			for (let player of vm.lineup.players){
+				lineup.players.push({"id":player.id})
+			}
+			lineup.userId=userId
+			console.log("test")
+			console.log(lineup)
+			$http.post("http://localhost:8080/SpringMVCCustom/lineup", JSON.stringify(lineup)).then(function(successData){
+				console.log(successData);
+				}, function(error){
+					console.log(error)
+				});
 		}
 	}]);

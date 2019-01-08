@@ -14,6 +14,7 @@
 <script src="<c:url value="/resources/js/app.js" />"></script>
 <script src="<c:url value="/resources/js/playerCtrl.js" />"></script>
 <script src="<c:url value="/resources/js/tabCtrl.js" />"></script>
+<script src="<c:url value="/resources/js/lineupCtrl.js" />"></script>
 
 <style>
 button:disabled,
@@ -96,13 +97,11 @@ margin-right:auto
 		</div>
 	</div>
 	<div class="row" ng-controller="playerCtrl as p" ng-show="t.isSet(1)">
-		<jsp:include page="/WEB-INF/templates/fragments/allPlayers.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/templates/fragments/allPlayers.jsp"></jsp:include>	
+		<jsp:include page="/WEB-INF/templates/fragments/lineupBuilder.jsp"></jsp:include>	
 	</div>
-	
-	<div class = "row">
-		<div class = "col-md-6">
-			<div ng-show="t.isSet(2)">Lineups</div>
-		</div>
+	<div class = "row" ng-controller="lineupCtrl as l" ng-show="t.isSet(2)">
+		<jsp:include page="/WEB-INF/templates/fragments/lineups.jsp"></jsp:include>
 	</div>	
 	<div class = "row">
 		<div class = "col-md-6">

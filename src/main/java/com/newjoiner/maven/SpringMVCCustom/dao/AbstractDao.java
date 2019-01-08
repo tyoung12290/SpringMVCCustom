@@ -4,10 +4,11 @@ package com.newjoiner.maven.SpringMVCCustom.dao;
 import java.io.Serializable;
  
 import java.lang.reflect.ParameterizedType;
- 
-import org.hibernate.Criteria;
+
+import javax.persistence.criteria.CriteriaBuilder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
  
 public abstract class AbstractDao<PK extends Serializable, T> {
@@ -28,7 +29,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
  
     @SuppressWarnings("unchecked")
     public T getByKey(PK key) {
-        return (T) getSession().get(persistentClass, key);
+        return getSession().get(persistentClass, key);
     }
  
     public void persist(T entity) {
@@ -47,10 +48,14 @@ public abstract class AbstractDao<PK extends Serializable, T> {
         getSession().saveOrUpdate(entity);
     }
      
-    protected Criteria createEntityCriteria(){
-        return getSession().createCriteria(persistentClass);
+    protected CriteriaBuilder builder(){
+        return getSession().getCriteriaBuilder();
     }
     
+    
+    protected Query customQuery(String query) {
+    	return getSession().createQuery(query);
+    }
     
 }
 	
