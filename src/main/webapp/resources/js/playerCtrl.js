@@ -1,4 +1,4 @@
-angular.module('myApp').controller('playerCtrl', ['$http', function($http){
+angular.module('myApp').controller('playerCtrl', ['$http', 'tagFactory', function($http, tagFactory){
 		let vm = this;
 		vm.player={};
 		vm.allPlayers={};
@@ -24,6 +24,15 @@ angular.module('myApp').controller('playerCtrl', ['$http', function($http){
 					total:0
 					}
 		};
+		vm.fetchTags= function() {
+			
+			//TODO build table and POJO to manage tags
+//			tagFactory.getTags().success(function(result){
+//				vm.tags=result;
+//			}).error(function(error){
+//				console.log(error)
+//			});
+		}
 		vm.search={pos:''};
 		vm.loadPlayers= function(){
 			$http.get("http://localhost:8080/SpringMVCCustom/players").then(function(successData){
@@ -62,6 +71,7 @@ angular.module('myApp').controller('playerCtrl', ['$http', function($http){
 					break;
 				}
 			}
+			vm.tags = tagFactory.calcTags(vm.lineup.playerCount.total);
 		}
 		vm.removePlayer = function(activePlayer, fromPlayers){
 			if(fromPlayers==true){
@@ -88,15 +98,19 @@ angular.module('myApp').controller('playerCtrl', ['$http', function($http){
 		}
 		
 		vm.saveLineup = function(userId){
+			let date = new Date();
+			let dateString = new Date(date.getTime() - (date.getTimezoneOffset() * 60000 ))
+			                    .toISOString()
+			                    .split("T")[0];
 			let lineup = {};
 			lineup.players=[];
 			
 			for (let player of vm.lineup.players){
 				lineup.players.push({"id":player.id})
 			}
-			lineup.userId=userId
-			console.log("test")
-			console.log(lineup)
+			lineup.userId=userId;
+			lineup.date=dateString;
+			
 			$http.post("http://localhost:8080/SpringMVCCustom/lineup", JSON.stringify(lineup)).then(function(successData){
 				console.log(successData);
 				}, function(error){

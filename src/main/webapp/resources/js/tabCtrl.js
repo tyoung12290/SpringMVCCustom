@@ -1,6 +1,6 @@
 angular.module('myApp').controller('tabCtrl', [function() {
 	let tm = this;
-    tm.tab = 2;
+    tm.tab = 1;
 
     tm.setTab = function(newTab){
       tm.tab = newTab;

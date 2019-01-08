@@ -14,7 +14,10 @@
 <script src="<c:url value="/resources/js/app.js" />"></script>
 <script src="<c:url value="/resources/js/playerCtrl.js" />"></script>
 <script src="<c:url value="/resources/js/tabCtrl.js" />"></script>
+<script src="<c:url value="/resources/js/factory/lineupFactory.js" />"></script>
 <script src="<c:url value="/resources/js/lineupCtrl.js" />"></script>
+<script src="<c:url value="/resources/js/factory/tagFactory.js" />"></script>
+
 
 <style>
 button:disabled,
@@ -96,7 +99,7 @@ margin-right:auto
 			</div>
 		</div>
 	</div>
-	<div class="row" ng-controller="playerCtrl as p" ng-show="t.isSet(1)">
+	<div class="row" ng-controller="playerCtrl as p" ng-show="t.isSet(1)" ng-init="p.loadPlayers()">
 		<jsp:include page="/WEB-INF/templates/fragments/allPlayers.jsp"></jsp:include>	
 		<jsp:include page="/WEB-INF/templates/fragments/lineupBuilder.jsp"></jsp:include>	
 	</div>

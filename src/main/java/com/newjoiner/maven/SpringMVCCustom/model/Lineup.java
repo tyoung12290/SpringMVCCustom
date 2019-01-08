@@ -1,5 +1,6 @@
 package com.newjoiner.maven.SpringMVCCustom.model;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +44,8 @@ public class Lineup {
     @Column(name="score")
     private int score;*/
 	
-    /*@Column(name="date")
-    private Date date;*/
+    @Column(name="date")
+    private Date date;
     
     public int getId() {
         return id;
@@ -80,13 +81,13 @@ public class Lineup {
 		return result;
 	}
 
-	/*public Date getDate() {
+	public Date getDate() {
 		return date;
 	}
 
 	public void setDate(Date date) {
 		this.date = date;
-	}*/
+	}
 
 	@Override
 	public boolean equals(Object obj) {

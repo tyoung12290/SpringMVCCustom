@@ -3,7 +3,7 @@
 </head>
 <body>
 	<div class="col-md-4">
-		<jsp:include page="/WEB-INF/templates/fragments/lineup_filters.jsp">
+		<jsp:include page="/WEB-INF/templates/fragments/lineup_tags.jsp">
 			<jsp:param name="title" value="lineupSalary" />
 		</jsp:include>
 		<ul class="lineup__body">

@@ -2,7 +2,7 @@
 <head>
 </head>
 <body>
-<div class="col-md-8" ng-init="p.loadPlayers()">
+<div class="col-md-8" >
 	<jsp:include page="/WEB-INF/templates/fragments/lineup_filters.jsp">
 		<jsp:param name="title" value="Lineup" />
 	</jsp:include>

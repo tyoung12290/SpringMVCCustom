@@ -15,7 +15,8 @@
 			<td ng-repeat = "player in lineup.players" class="col-md-4">
 				<div>{{player.firstName}}</div>
 				<div>{{player.lastName}}</div>
-				<div>{{player.playerDetail.salary}}</div>
+				<div>{{player.salary}}</div>
+				<div>{{player.score}}</div>
 		</tr>
 	</table>	
 	</div>
