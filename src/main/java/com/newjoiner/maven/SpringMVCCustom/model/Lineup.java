@@ -1,10 +1,8 @@
 package com.newjoiner.maven.SpringMVCCustom.model;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,22 +25,14 @@ public class Lineup {
 	@Column(name="id")
 	private int id;
 	
-	
 	@Column(name="user_id")
 	private int userId;
  
-	@ManyToMany(cascade= CascadeType.MERGE)
-    @JoinTable(name="LINEUP_PLAYER",
-    			joinColumns= {@JoinColumn(name="LINEUP_ID")},
-    			inverseJoinColumns= {@JoinColumn(name="PLAYER_ID")})	
-    private List<Player> players = new ArrayList<Player>();
-    
-    
-   /* @Column(name="salary")
-    private int salary;
-    
-    @Column(name="score")
-    private int score;*/
+	@ManyToMany
+    @JoinTable(name="LINEUP_PLAYER_DETAIL",
+    			joinColumns= {@JoinColumn(name="LINEUP_ID", referencedColumnName="id")},
+    			inverseJoinColumns= {@JoinColumn(name="PLAYER_DETAIL_ID", referencedColumnName="id")})	
+    private List<PlayerDetail> playerDetails;
 	
     @Column(name="date")
     private Date date;
@@ -64,13 +54,21 @@ public class Lineup {
 		this.userId = userId;
 	}
 
-	public List<Player> getPlayers() {
-        return players;
+	public List<PlayerDetail> getPlayerDetails() {
+        return playerDetails;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
+    public void setPlayerDetails(List<PlayerDetail> playerDetails) {
+        this.playerDetails = playerDetails;
     }
+    
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -79,14 +77,6 @@ public class Lineup {
 		result = prime * result + id;
 		result = prime * result + userId;
 		return result;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	@Override
@@ -104,13 +94,5 @@ public class Lineup {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Lineup [id=" + id + ", userId=" + userId + ", players=" + getPlayers() + "]";
-	}
-    
-	
-
-	
+    	
 }

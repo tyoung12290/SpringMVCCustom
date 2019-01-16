@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 
 import javax.persistence.criteria.CriteriaBuilder;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -44,8 +46,11 @@ public abstract class AbstractDao<PK extends Serializable, T> {
         getSession().delete(entity);
     }
     
+    
+    
     public void saveOrUpdate(T entity) {
-        getSession().saveOrUpdate(entity);
+    	System.out.println("made it");
+        getSession().update(entity);
     }
      
     protected CriteriaBuilder builder(){
@@ -55,6 +60,10 @@ public abstract class AbstractDao<PK extends Serializable, T> {
     
     protected Query customQuery(String query) {
     	return getSession().createQuery(query);
+    }
+    
+    protected Criteria createEntityCriteria(){
+        return getSession().createCriteria(persistentClass);
     }
     
 }

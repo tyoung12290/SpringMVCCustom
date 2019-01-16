@@ -8,15 +8,15 @@ import com.newjoiner.maven.SpringMVCCustom.model.Player;
 import com.newjoiner.maven.SpringMVCCustom.service.PlayerService;
 
 @Component
-public class PlayerToLineupConvertor implements Converter<Object, Player> {
+public class PlayerDetailToPlayerConvertor implements Converter<Object, Player> {
 	@Autowired
 	PlayerService playerService;
 	
+	//intercept Player object nested in lineup and retrieve Player POJOS from array of ids
 	@Override
 	public Player convert(Object element) {
 		Integer id = Integer.parseInt((String)element);
 		Player player = playerService.findById(id);
-		System.out.println("Player "+ player);
 		return player;
 	}
 }

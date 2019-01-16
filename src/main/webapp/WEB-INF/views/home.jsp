@@ -12,62 +12,13 @@
 </jsp:include>
 <link href="<c:url value="/resources/style.css" />" rel="stylesheet">
 <script src="<c:url value="/resources/js/app.js" />"></script>
-<script src="<c:url value="/resources/js/playerCtrl.js" />"></script>
-<script src="<c:url value="/resources/js/tabCtrl.js" />"></script>
-<script src="<c:url value="/resources/js/factory/lineupFactory.js" />"></script>
-<script src="<c:url value="/resources/js/lineupCtrl.js" />"></script>
-<script src="<c:url value="/resources/js/factory/tagFactory.js" />"></script>
+<script src="<c:url value="/resources/js/player/playerCtrl.js" />"></script>
+<script src="<c:url value="/resources/js/ui/tabCtrl.js" />"></script>
+<script src="<c:url value="/resources/js/lineup/lineupFactory.js" />"></script>
+<script src="<c:url value="/resources/js/lineup/lineupCtrl.js" />"></script>
+<script src="<c:url value="/resources/js/strategy/tagFactory.js" />"></script>
+<script src="<c:url value="/resources/js/strategy/tagCtrl.js" />"></script>
 
-
-<style>
-button:disabled,
-button[disabled]{
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-}
-
-.player-add{
-    float:right;
-}
-
-.player-add-button{
-	border: none;
-	background-color:transparent;
-	font-family:"fontAwesome";
-	color:#36c565;
-	font-size: 2rem;
-	display: block;
-	margin:auto;
-}
-.player-remove-button{
-	border: none;
-	background-color:transparent;
-	font-family:"fontAwesome";
-	color:red;
-	font-size: 2rem;
-	display: block;
-	margin:auto;
-}
-
-td{
-flex:auto;
-}
-
-
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
-}
-
-.row{
-margin-left:auto;
-margin-right:auto
-}
-
-</style>
 </head>
 
 <body>
@@ -80,7 +31,7 @@ margin-right:auto
 		       	</li>
 		       	
 		       	<li ng-class="{ active: t.isSet(2) }">
-		          	<a href ng-click="t.setTab(2)">lineups</a>
+		          	<a href ng-click="t.setTab(2)" >lineups</a>
 		       	</li>
 		       	<li ng-class="{ active: t.isSet(3) }">
 		          	<a href ng-click="t.setTab(3)">research</a>
@@ -99,12 +50,12 @@ margin-right:auto
 			</div>
 		</div>
 	</div>
-	<div class="row" ng-controller="playerCtrl as p" ng-show="t.isSet(1)" ng-init="p.loadPlayers()">
-		<jsp:include page="/WEB-INF/templates/fragments/allPlayers.jsp"></jsp:include>	
-		<jsp:include page="/WEB-INF/templates/fragments/lineupBuilder.jsp"></jsp:include>	
+	<div class="row"  ng-show="t.isSet(1)" ng-controller="playerCtrl as p" ng-init="p.loadPlayers()">
+		<jsp:include page="/WEB-INF/templates/fragments/player/players.jsp"></jsp:include>	
+		<jsp:include page="/WEB-INF/templates/fragments/lineup/lineup_builder.jsp"></jsp:include>	
 	</div>
 	<div class = "row" ng-controller="lineupCtrl as l" ng-show="t.isSet(2)">
-		<jsp:include page="/WEB-INF/templates/fragments/lineups.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/templates/fragments/lineup/lineups.jsp"></jsp:include>
 	</div>	
 	<div class = "row">
 		<div class = "col-md-6">

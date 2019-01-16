@@ -13,7 +13,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import com.newjoiner.maven.SpringMVCCustom.convertor.PlayerToLineupConvertor;
+import com.newjoiner.maven.SpringMVCCustom.convertor.PlayerDetailToLineupConvertor;
+import com.newjoiner.maven.SpringMVCCustom.convertor.PlayerDetailToPlayerConvertor;
  
 @Configuration
 @EnableWebMvc
@@ -21,7 +22,9 @@ import com.newjoiner.maven.SpringMVCCustom.convertor.PlayerToLineupConvertor;
 public class AppConfig extends WebMvcConfigurerAdapter implements WebMvcConfigurer{
      
 	@Autowired
-	PlayerToLineupConvertor playerToLineupConvertor;
+	PlayerDetailToLineupConvertor playerDetailToLineupConvertor;
+	@Autowired
+	PlayerDetailToPlayerConvertor playerDetailToPlayerConvertor;
 	
     @Bean
     public ViewResolver viewResolver() {
@@ -47,7 +50,8 @@ public class AppConfig extends WebMvcConfigurerAdapter implements WebMvcConfigur
      */
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(playerToLineupConvertor);
+        registry.addConverter(playerDetailToLineupConvertor);
+        registry.addConverter(playerDetailToPlayerConvertor);
     }
     
     

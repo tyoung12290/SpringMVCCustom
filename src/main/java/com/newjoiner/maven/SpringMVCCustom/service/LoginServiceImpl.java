@@ -20,6 +20,7 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Override
 	public User findByUser(String username) {
+		System.out.println(username);
 		List<User> users = dao.findByUser(username);
 		User user = users.get(0);
         return user;

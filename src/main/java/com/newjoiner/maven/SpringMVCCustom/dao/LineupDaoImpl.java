@@ -10,22 +10,18 @@ import com.newjoiner.maven.SpringMVCCustom.model.Lineup;
  
 @Repository("lineupDao")
 public class LineupDaoImpl extends AbstractDao<Integer, Lineup> implements LineupDao {
-
- 
-    /*@Override
-	@SuppressWarnings("unchecked")
-    public List<Lineup> findLineupsByUser(int userId) {
-        Criteria criteria = createEntityCriteria();
-        criteria.add(Restrictions.eq("userId", userId));
-        List<Lineup> lineups = criteria.list();
-        if(lineups!=null){
-        	lineups.forEach(lineup ->{
-        		Hibernate.initialize(lineup.getPlayers());
-        	});
-        }
-        return lineups;
-    }*/
-    
+   
+	@Override
+	public Lineup findById(int id) {
+        return getByKey(id);
+    }
+	
+	@Override
+	public List<Lineup> findAllLineups() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
     @Override
    	@SuppressWarnings("unchecked")
        public List<Lineup> findLineupsByUser(int userId) {
@@ -35,7 +31,7 @@ public class LineupDaoImpl extends AbstractDao<Integer, Lineup> implements Lineu
     	List<Lineup> lineups = query.list();
            if(lineups!=null){
            	lineups.forEach(lineup ->{
-           		Hibernate.initialize(lineup.getPlayers());
+           		Hibernate.initialize(lineup.getPlayerDetails());
            	});
            }
            return lineups;
@@ -43,14 +39,18 @@ public class LineupDaoImpl extends AbstractDao<Integer, Lineup> implements Lineu
     
     @Override
 	public void saveLineup(Lineup lineup) {
-        persist(lineup);
+        save(lineup);
     }
-
-	@Override
-	public List<Lineup> findAllLineups() {
-		// TODO Auto-generated method stub
-		return null;
-	}
     
+    @Override
+	public void saveOrUpdate(Lineup updated_lineup) {
+    	Lineup lineup = findById(updated_lineup.getId());
+    	lineup.setPlayerDetails(updated_lineup.getPlayerDetails());
+    }
+    
+    @Override
+	public void deleteLineup(Lineup lineup) {
+        delete(lineup);
+    }
     
 }

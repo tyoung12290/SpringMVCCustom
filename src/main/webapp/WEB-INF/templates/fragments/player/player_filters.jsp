@@ -1,9 +1,3 @@
-<%@taglib prefix="tags" tagdir="/WEB-INF/tags" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 	<head>
 	    <jsp:include page="/WEB-INF/templates/fragments/header.jsp">
@@ -20,7 +14,9 @@
 			  <button type="button" ng-model="p.search.pos" value="C" ng-click="p.getVal($event)" class="btn btn-primary">C</button>
 			  <button type="button" ng-model="p.search.pos" value="All" ng-click="p.getVal($event)" class="btn btn-primary">All</button>
 			</div>
-			<div class = "search_players">Search</div>
+			<div class = "search_players">
+				<input id="player_search" placeholder="Search"  ng-model="p.search.fuzzy"></input>
+			</div>
 	</div>
 
 

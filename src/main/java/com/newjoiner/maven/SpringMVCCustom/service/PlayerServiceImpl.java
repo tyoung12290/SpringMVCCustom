@@ -1,8 +1,6 @@
 package com.newjoiner.maven.SpringMVCCustom.service;
 
 
-import java.util.List;
- 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,16 +15,14 @@ public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private PlayerDao dao;
      
-    public Player findById(int id) {
+    @Override
+	public Player findById(int id) {
         return dao.findById(id);
     }
-     
-    public List<Player> findAllPlayers() {
-        return dao.findAllPlayers();
-    }
     
-    public void savePlayer(Player player){
-    	dao.savePlayer(player);
+    @Override
+    public void updatePlayer(Player player) {
+    	dao.updatePlayer(player);
     }
-     
+        
 }

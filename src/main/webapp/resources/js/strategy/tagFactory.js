@@ -16,20 +16,32 @@ angular.module('myApp').factory('tagFactory', [function() {
 		 color:"#3EC559",
 		 status:false}
     	];
-    
+    //TODO pre fetch tags from database
+    //Add tool tip for desc
     /*this.getTags = function(){
 		return $http.get("http://localhost:8080/SpringMVCCustom/tag")
 	};*/
    
     this.calcTags = function(count){
     	switch(count){
+    	case 0:
+    		tags[0].status=false;
+    		tags[1].status=false;
+    		tags[2].status=false;
+    		break;
     	case 1:
     		tags[0].status=true;
+    		tags[1].status=false;
+    		tags[2].status=false;
     		break;
     	case 2:
+    		tags[0].status=true;
     		tags[1].status=true;
+    		tags[2].status=false;
     		break;
     	case 3:
+    		tags[0].status=true;
+    		tags[1].status=true;
     		tags[2].status=true;
     		break;
     	}
