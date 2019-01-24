@@ -23,7 +23,7 @@ public class PlayerDetailDaoImpl extends AbstractDao<Integer, PlayerDetail> impl
     	Query query;
     	if (requestParams.containsKey("date")) {
     		Date date = Date.valueOf((String) requestParams.get("date"));
-        	query = customQuery("FROM PlayerDetail where date =: date");
+        	query = customQuery("FROM PlayerDetail where date >: date");
         	query.setParameter("date", date);
     	}else {
     		query = customQuery("FROM PlayerDetail");

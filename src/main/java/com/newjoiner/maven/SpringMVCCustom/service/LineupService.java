@@ -8,8 +8,10 @@ import com.newjoiner.maven.SpringMVCCustom.model.Lineup;
 public interface LineupService {
  
 	List<Lineup> findLineupsByUser(int userId); 
+	
+	Lineup findById(int lineupId); 
     
-    void saveLineup(Lineup lineup);
+    Lineup saveLineup(Lineup lineup);
     
     void deleteLineup(int lineupId);   
     

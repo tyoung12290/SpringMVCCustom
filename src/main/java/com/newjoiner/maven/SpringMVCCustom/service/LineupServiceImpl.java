@@ -23,18 +23,22 @@ public class LineupServiceImpl implements LineupService {
     }
     
     @Override
-	public void saveLineup(Lineup lineup){
+	public Lineup findById(int lineupId) {
+        return dao.findById(lineupId);
+    }
+    
+    @Override
+	public Lineup saveLineup(Lineup lineup){
     	dao.saveLineup(lineup);
+    	return dao.findById(lineup.getId());
     }
     
     @Override
 	public void updateLineup(Lineup lineup){
-    	//lineup.getPlayers();
-
     	dao.saveOrUpdate(lineup);
 
     }
-    //check for actual deletion
+
     @Override
 	public void deleteLineup(int lineupId){
     	Lineup lineup = dao.findById(lineupId);

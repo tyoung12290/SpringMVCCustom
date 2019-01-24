@@ -15,13 +15,7 @@ public class LineupDaoImpl extends AbstractDao<Integer, Lineup> implements Lineu
 	public Lineup findById(int id) {
         return getByKey(id);
     }
-	
-	@Override
-	public List<Lineup> findAllLineups() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+
     @Override
    	@SuppressWarnings("unchecked")
        public List<Lineup> findLineupsByUser(int userId) {

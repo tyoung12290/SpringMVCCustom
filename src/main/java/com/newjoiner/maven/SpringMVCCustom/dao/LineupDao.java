@@ -9,8 +9,6 @@ public interface LineupDao {
 		Lineup findById(int lineupId);
  
 		List<Lineup> findLineupsByUser(int userId);
-		
-		List<Lineup> findAllLineups();
  
         void saveLineup(Lineup lineup);
         

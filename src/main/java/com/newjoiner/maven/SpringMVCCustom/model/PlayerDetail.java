@@ -31,6 +31,10 @@ public class PlayerDetail {
 	@JoinColumn(name="player_id", referencedColumnName="id")
 	private Player player;
 	
+	@ManyToOne
+	@JoinColumn(name="team_id", referencedColumnName="id")
+	private Team team;
+	
 	@ManyToMany(mappedBy="playerDetails")
 	@JsonIgnore
 	private List<Lineup> lineups;
@@ -38,8 +42,11 @@ public class PlayerDetail {
 	@Column(name="salary")
 	private int salary;
 	
-	@Column(name="score")
-	private int score;
+	@Column(name="act_score",nullable = true)
+	private Integer actualScore;
+	
+	@Column(name="proj_score")
+	private Integer projectedScore;
 	
 	@Column(name="date")
 	private Date date;
@@ -59,6 +66,16 @@ public class PlayerDetail {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+	
+	
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
 
 	public int getSalary() {
 		return salary;
@@ -68,15 +85,21 @@ public class PlayerDetail {
 		this.salary = salary;
 	}
 
-	public int getScore() {
-		return score;
+	public Integer getActualScore() {
+		return actualScore;
 	}
 
-	public void setScore(int score) {
-		this.score = score;
+	public void setActualScore(Integer actualScore) {
+		this.actualScore = actualScore;
 	}
-	
-	
+
+	public Integer getProjectedScore() {
+		return projectedScore;
+	}
+
+	public void setProjectedScore(Integer projectedScore) {
+		this.projectedScore = projectedScore;
+	}
 
 	public Date getDate() {
 		return date;
@@ -103,7 +126,6 @@ public class PlayerDetail {
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
 		result = prime * result + salary;
-		result = prime * result + score;
 		return result;
 	}
 
@@ -124,8 +146,6 @@ public class PlayerDetail {
 		if (id != other.id)
 			return false;
 		if (salary != other.salary)
-			return false;
-		if (score != other.score)
 			return false;
 		return true;
 	}

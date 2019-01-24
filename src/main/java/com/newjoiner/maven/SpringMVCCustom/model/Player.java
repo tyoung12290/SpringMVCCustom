@@ -31,10 +31,6 @@ public class Player {
     @Column(name = "pos", nullable = true)
     private String pos;
     
-    @Size(min=3, max=3)
-    @Column(name = "team", nullable = true)
-    private String team;
-    
 
     public Player(String firstName, String lastName) {
 		this.firstName = firstName;
@@ -72,15 +68,5 @@ public class Player {
 	public void setPos(String pos) {
 		this.pos = pos;
 	}
-
-	public String getTeam() {
-		return team;
-	}
-
-	public void setTeam(String team) {
-		this.team = team;
-	}
-	
-	
 
 }
