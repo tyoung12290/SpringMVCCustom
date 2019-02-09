@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -35,10 +36,18 @@ public class PlayerDetail {
 	@JoinColumn(name="team_id", referencedColumnName="id")
 	private Team team;
 	
+	@ManyToMany
+    @JoinTable(name="PLAYER_DETAIL_GAME",
+    			joinColumns= {@JoinColumn(name="PLAYER_DETAIL_ID", referencedColumnName="id")},
+    			inverseJoinColumns= {@JoinColumn(name="GAME_ID", referencedColumnName="id")})	
+    private List<Game> games;
+	
 	@ManyToMany(mappedBy="playerDetails")
 	@JsonIgnore
 	private List<Lineup> lineups;
 	
+	
+
 	@Column(name="salary")
 	private int salary;
 	
@@ -75,6 +84,14 @@ public class PlayerDetail {
 
 	public void setTeam(Team team) {
 		this.team = team;
+	}
+	
+	public List<Game> getGames() {
+		return games;
+	}
+
+	public void setGames(List<Game> games) {
+		this.games = games;
 	}
 
 	public int getSalary() {

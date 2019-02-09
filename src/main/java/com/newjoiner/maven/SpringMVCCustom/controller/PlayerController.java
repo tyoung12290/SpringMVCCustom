@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.newjoiner.maven.SpringMVCCustom.model.PlayerDetail;
+import com.newjoiner.maven.SpringMVCCustom.dto.PlayerDetailDto;
 import com.newjoiner.maven.SpringMVCCustom.service.PlayerDetailService;
 
 @Controller
@@ -24,7 +24,7 @@ public class PlayerController {
 	@RequestMapping(value="/players", method = RequestMethod.GET)
 	@ResponseBody
 	@CrossOrigin
-	public List<PlayerDetail> getPlayers(@RequestParam Map<String,String> requestParams) {
+	public List<PlayerDetailDto> getPlayers(@RequestParam Map<String,String> requestParams) {
 		return playerDetailService.findAllPlayers(requestParams);
 	}
 	

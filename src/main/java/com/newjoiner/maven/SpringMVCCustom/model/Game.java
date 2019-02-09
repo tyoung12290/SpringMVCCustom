@@ -1,6 +1,7 @@
 package com.newjoiner.maven.SpringMVCCustom.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="game_team")
@@ -29,6 +33,10 @@ public class Game {
 	@ManyToOne
 	@JoinColumn(name="team_id", referencedColumnName="id")
 	private Team team;
+	
+	@ManyToMany(mappedBy="games")
+	@JsonIgnore
+	private List<PlayerDetail> playerDetails;
 	
 	@Column(name="location")
 	private String location;
@@ -67,6 +75,14 @@ public class Game {
 	}
 
 	
+
+	public List<PlayerDetail> getPlayerDetails() {
+		return playerDetails;
+	}
+
+	public void setPlayerDetails(List<PlayerDetail> playerDetails) {
+		this.playerDetails = playerDetails;
+	}
 
 	public Team getTeam() {
 		return team;
