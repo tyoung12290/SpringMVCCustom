@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class PlayerDetail {
 	@JoinColumn(name="team_id", referencedColumnName="id")
 	private Team team;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="PLAYER_DETAIL_GAME",
     			joinColumns= {@JoinColumn(name="PLAYER_DETAIL_ID", referencedColumnName="id")},
     			inverseJoinColumns= {@JoinColumn(name="GAME_ID", referencedColumnName="id")})	

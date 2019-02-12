@@ -1,7 +1,6 @@
 package com.newjoiner.maven.SpringMVCCustom.model;
 
-
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,10 +14,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
  
 @Entity
-@Table(name="lineup")
-public class Lineup {
+@Table(name="lineup_optimized")
+public class LineupOptimized {
 	
-	public Lineup() {};
+	public LineupOptimized() {};
 	
 
 	@Id
@@ -26,12 +25,9 @@ public class Lineup {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="user_id")
-	private int userId;
- 
 	@ManyToMany
-    @JoinTable(name="LINEUP_PLAYER_DETAIL",
-    			joinColumns= {@JoinColumn(name="LINEUP_ID", referencedColumnName="id")},
+    @JoinTable(name="LINEUP_OPTIMIZED_PLAYER_DETAIL",
+    			joinColumns= {@JoinColumn(name="LINEUP_OPTIMIZED_ID", referencedColumnName="id")},
     			inverseJoinColumns= {@JoinColumn(name="PLAYER_DETAIL_ID", referencedColumnName="id")})	
     private List<PlayerDetail> playerDetails;
 	
@@ -45,15 +41,6 @@ public class Lineup {
     public void setId(int id) {
         this.id = id;
     }
-    
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 
 	public List<PlayerDetail> getPlayerDetails() {
         return playerDetails;
@@ -68,8 +55,6 @@ public class Lineup {
 	}
 
 	public void setDate(Date date) {
-		System.out.println(date.toString());
-		System.out.println(date);
 		this.date = date;
 	}
 	
@@ -78,7 +63,6 @@ public class Lineup {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + userId;
 		return result;
 	}
 
@@ -90,10 +74,8 @@ public class Lineup {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Lineup other = (Lineup) obj;
+		LineupOptimized other = (LineupOptimized) obj;
 		if (id != other.id)
-			return false;
-		if (userId != other.userId)
 			return false;
 		return true;
 	}

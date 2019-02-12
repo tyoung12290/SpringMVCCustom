@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.newjoiner.maven.SpringMVCCustom.dao.AbstractDao;
 import com.newjoiner.maven.SpringMVCCustom.model.Lineup;
-import com.newjoiner.maven.SpringMVCCustom.model.PlayerDetail;
 
 @Repository("lineupDao")
 public class LineupDaoImpl extends AbstractDao<Integer, Lineup> implements LineupDao {
@@ -63,11 +62,13 @@ public class LineupDaoImpl extends AbstractDao<Integer, Lineup> implements Lineu
 
 	@Override
 	public void saveLineup(Lineup lineup) {
+		System.out.println(lineup.getDate());
 		getSession().save(lineup);
 	}
 
 	@Override
 	public void saveOrUpdate(Lineup updated_lineup) {
+		System.out.println(updated_lineup.getDate());
 		Lineup lineup = findById(updated_lineup.getId());
 		lineup.setPlayerDetails(updated_lineup.getPlayerDetails());
 	}

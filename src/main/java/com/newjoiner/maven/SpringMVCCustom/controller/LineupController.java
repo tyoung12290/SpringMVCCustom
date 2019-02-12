@@ -1,8 +1,6 @@
 package com.newjoiner.maven.SpringMVCCustom.controller;
 
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,17 +29,10 @@ public class LineupController {
 		return lineups;
 	}
 	
-	@RequestMapping(value="/lineup/optimized", method=RequestMethod.GET)
-	public List<Lineup> getLineups(@RequestParam Map<String,String> requestParams) {
-		lineupService.findOptimizedLineup(requestParams);
-		List<Lineup> lineups = lineupService.findLineupsByUser(1);
-		return lineups;
-	}
-	
-
 	
 	@RequestMapping(value="/lineup", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Lineup saveLineup(@RequestBody Lineup lineup) {
+		System.out.println(lineup.getDate());
 		lineupService.saveLineup(lineup);
 		return  lineup;
 	}
