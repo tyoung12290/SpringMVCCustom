@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.newjoiner.maven.SpringMVCCustom.dao.LineupDao;
 import com.newjoiner.maven.SpringMVCCustom.dao.LineupOptimizedDao;
@@ -25,8 +26,8 @@ public class LineupOptimizedServiceImpl implements LineupOptimizedService {
     private LineupOptimizedDao dao;
      
     @Override
-	public List<LineupOptimized> findOptimizedLineups() {
-        return dao.findOptimizedLineups();
+	public List<LineupOptimized> findOptimizedLineups(Map<String,String> requestParams) {
+        return dao.findOptimizedLineups(requestParams);
     }
         
     
